@@ -1,1 +1,11 @@
+koira
+kissa
+talo
+auto
+puu
+kirja
+vesi
+leipä
+kala
+koulu
 jalkapallo

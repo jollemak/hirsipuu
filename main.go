@@ -50,12 +50,12 @@ func main() {
 		}
 
 		fmt.Println(stickMan)
-		fmt.Println("Arvaa kirjain tai sana:")
+		fmt.Println("Arvaa kirjain:")
 		fmt.Scan(&guess)
 		clearScreen()
 
-		if len(guess) > 2 {
-			fmt.Println("\nSanan täytyy olla vähintään 3 kirjainta.")
+		if len(guess) > 1 {
+			fmt.Println("\nLiikaa kirjaimia.")
 			if len(wrongLetters) > 0 {
 				fmt.Printf("Väärät kirjaimet: %s\n", wrongLetters)
 			}
