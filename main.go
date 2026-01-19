@@ -20,11 +20,10 @@ func main() {
 	randIdx := int(n.Int64())
 	answer := strings.TrimSpace(wordArr[randIdx])
 
-	fmt.Println("Hirsipuu🌳")
+	fmt.Println("Hangman🌳")
 
 	word := strings.Repeat("_", len(answer))
-
-	// fmt.Printf("Sana: %s, %d\n", answer, len(answer))
+	// fmt.Printf("Word: %s, %d\n", answer, len(answer))
 
 	guessedRight := ""
 	guessedWrong := ""
@@ -35,57 +34,57 @@ func main() {
 	for {
 		guess := ""
 		stickMan = displayStickMan(count)
-		fmt.Printf("\nSana: %s\n", word)
+		fmt.Printf("\nWord: %s\n", word)
 
 		if count == 6 {
-			fmt.Printf("Hävisit pelin😒. Oikea vastaus oli: %s\n", answer)
+			fmt.Printf("You lost the game😒. The correct answer was: %s\n", answer)
 			fmt.Println(stickMan)
 			return
 		}
 
 		if word == answer && count < 6 {
-			fmt.Println("Voiti pelin🤩")
+			fmt.Println("You won the game🤩")
 			fmt.Println(stickMan)
 			return
 		}
 
 		fmt.Println(stickMan)
-		fmt.Println("Arvaa kirjain:")
+		fmt.Println("Guess a letter:")
 		fmt.Scan(&guess)
 		clearScreen()
 
-		if len(guess) > 1 {
-			fmt.Println("\nLiikaa kirjaimia.")
+		if len(guess) > 2 {
+			fmt.Println("\nToo many letters.")
 			if len(wrongLetters) > 0 {
-				fmt.Printf("Väärät kirjaimet: %s\n", wrongLetters)
+				fmt.Printf("Wrong letters: %s\n", wrongLetters)
 			}
 			continue
 		}
 
 		if strings.Contains(guessedRight, guess) || strings.Contains(guessedWrong, guess) {
-			fmt.Println("\nTämä kirjain on jo arvattu.")
+			fmt.Println("\nThis letter has already been guessed.")
 			if len(wrongLetters) > 0 {
-				fmt.Printf("Väärät kirjaimet: %s\n", wrongLetters)
+				fmt.Printf("Wrong letters: %s\n", wrongLetters)
 			}
 			continue
 		}
 
 		if strings.Contains(answer, guess) {
-			fmt.Println("\nOikein! ✅")
+			fmt.Println("\nCorrect! ✅")
 			guessedRight += guess
 		} else {
-			fmt.Println("\nVäärin ❌")
+			fmt.Println("\nWrong ❌")
 			count++
 			guessedWrong += guess
 		}
 
-		//Väärät kirjaimet
+		// Wrong letters
 		wrongLetters = displayWrong(guessedWrong, wrongLetters)
 		if len(wrongLetters) > 0 {
-			fmt.Printf("Väärät kirjaimet: %s\n", wrongLetters)
+			fmt.Printf("Wrong letters: %s\n", wrongLetters)
 		}
 
-		// Oikein arvatut kirjaimet
+		// Correctly guessed letters
 		word = displayRight(guess, answer, word)
 		stickMan = displayStickMan(count)
 
